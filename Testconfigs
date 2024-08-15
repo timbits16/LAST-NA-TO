@@ -28,3 +28,50 @@ ip access-list extended ALLOW_DNS_HTTP_HTTPS
 
 interface GigabitEthernet0/3
  ip access-group ALLOW_DNS_HTTP_HTTPS out
+
+
+ip access-list extended DC
+ deny   tcp 10.150.28.0 0.0.0.255 any eq www
+ deny   tcp 10.150.60.0 0.0.0.255 any eq www
+ deny   tcp 10.150.96.0 0.0.0.255 any eq www
+ deny   tcp 10.150.28.0 0.0.0.255 any eq 443
+ deny   tcp 10.150.60.0 0.0.0.255 any eq 443
+ deny   tcp 10.150.96.0 0.0.0.255 any eq 443
+ deny   icmp 10.150.28.0 0.0.0.255 any
+ deny   icmp 10.150.60.0 0.0.0.255 any
+ deny   icmp 10.150.96.0 0.0.0.255 any
+ permit ip any any
+
+
+ip access-list extended Visitor185
+ permit icmp 10.150.28.0 0.0.0.255 10.150.0.0 0.0.255.255
+ permit udp 10.150.28.0 0.0.0.255 any eq 1985
+ permit udp any any eq bootps
+ permit udp any any eq bootpc
+ permit tcp 10.150.28.0 0.0.0.255 any eq www
+ permit tcp 10.150.28.0 0.0.0.255 any eq 443
+ permit udp 10.150.28.0 0.0.0.255 any eq domain
+ deny   ip any any
+
+
+ip access-list extended Visitor280
+ permit icmp 10.150.60.0 0.0.0.255 10.150.0.0 0.0.255.255
+ permit udp 10.150.60.0 0.0.0.255 any eq 1985
+ permit udp 10.150.60.0 0.0.0.255 any eq bootps
+ permit udp 10.150.60.0 0.0.0.255 any eq bootpc
+ permit tcp 10.150.60.0 0.0.0.255 any eq www
+ permit tcp 10.150.60.0 0.0.0.255 any eq 443
+ permit udp 10.150.60.0 0.0.0.255 any eq domain
+ deny   ip any any
+
+
+ip access-list extended Visitor360
+ permit icmp 10.150.96.0 0.0.0.255 10.150.0.0 0.0.255.255
+ permit udp 10.150.96.0 0.0.0.255 any eq 1985
+ permit udp 10.150.96.0 0.0.0.255 any eq bootps
+ permit udp 10.150.96.0 0.0.0.255 any eq bootpc
+ permit tcp 10.150.96.0 0.0.0.255 any eq www
+ permit tcp 10.150.96.0 0.0.0.255 any eq 443
+ permit udp 10.150.96.0 0.0.0.255 any eq domain
+ deny   ip any any
+
