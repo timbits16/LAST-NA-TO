@@ -29,8 +29,8 @@ ip access-list extended ALLOW_DNS_HTTP_HTTPS
 interface GigabitEthernet0/3
  ip access-group ALLOW_DNS_HTTP_HTTPS out
 
-
-ip access-list extended DC
+-------------------------------------------------------------------------------
+ip access-list extended ALLOW_DNS_HTTP_HTTPS
  deny   tcp 10.150.28.0 0.0.0.255 any eq www
  deny   tcp 10.150.60.0 0.0.0.255 any eq www
  deny   tcp 10.150.96.0 0.0.0.255 any eq www
