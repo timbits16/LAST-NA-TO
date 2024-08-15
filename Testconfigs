@@ -1,0 +1,30 @@
+ip access-list extended DENY_VISITORS_TO_DC
+ deny ip 10.150.28.0 0.0.0.255 10.150.0.0 0.0.0.255
+ deny ip 10.150.60.0 0.0.0.255 10.150.0.0 0.0.0.255
+ deny ip 10.150.96.0 0.0.0.255 10.150.0.0 0.0.0.255
+ permit ip any any
+
+interface Vlan990
+ ip access-group DENY_VISITORS_TO_DC in
+
+
+
+
+
+ip access-list extended ALLOW_DNS_HTTP_HTTPS
+ permit udp 10.150.28.0 0.0.0.255 any eq 53
+ permit tcp 10.150.28.0 0.0.0.255 any eq 53
+ permit tcp 10.150.28.0 0.0.0.255 any eq 80
+ permit tcp 10.150.28.0 0.0.0.255 any eq 443
+ permit udp 10.150.60.0 0.0.0.255 any eq 53
+ permit tcp 10.150.60.0 0.0.0.255 any eq 53
+ permit tcp 10.150.60.0 0.0.0.255 any eq 80
+ permit tcp 10.150.60.0 0.0.0.255 any eq 443
+ permit udp 10.150.96.0 0.0.0.255 any eq 53
+ permit tcp 10.150.96.0 0.0.0.255 any eq 53
+ permit tcp 10.150.96.0 0.0.0.255 any eq 80
+ permit tcp 10.150.96.0 0.0.0.255 any eq 443
+ permit ip any any
+
+interface GigabitEthernet0/3
+ ip access-group ALLOW_DNS_HTTP_HTTPS out
