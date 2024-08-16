@@ -204,6 +204,36 @@ interface Vlan220
 interface Vlan325
  ip access-group  ALLOW_VISITOR3 in
 -------------------------------------------------------------------------------------------------------------------------------------------------------
+version 4
+ip access-list extended ALLOW_VISITORS
+ permit icmp 10.150.28.0 0.0.0.255 10.150.0.0 0.0.255.255
+ permit icmp 10.150.60.0 0.0.0.255 10.150.0.0 0.0.255.255
+ permit icmp 10.150.96.0 0.0.0.255 10.150.0.0 0.0.255.255
+ permit udp 10.150.28.0 0.0.0.255 any eq 9999
+ permit udp 10.150.60.0 0.0.0.255 any eq 9999
+ permit udp 10.150.96.0 0.0.0.255 any eq 9999
+ permit udp 10.150.28.0 0.0.0.255 any eq bootps
+ permit udp 10.150.60.0 0.0.0.255 any eq bootps
+ permit udp 10.150.96.0 0.0.0.255 any eq bootps
+ permit udp 10.150.28.0 0.0.0.255 any eq bootpc
+ permit udp 10.150.60.0 0.0.0.255 any eq bootpc
+ permit udp 10.150.96.0 0.0.0.255 any eq bootpc
+ permit tcp 10.150.28.0 0.0.0.255 any eq www
+ permit tcp 10.150.60.0 0.0.0.255 any eq www
+ permit tcp 10.150.96.0 0.0.0.255 any eq www
+ permit tcp 10.150.28.0 0.0.0.255 any eq 443
+ permit tcp 10.150.60.0 0.0.0.255 any eq 443
+ permit tcp 10.150.96.0 0.0.0.255 any eq 443
+ permit udp 10.150.28.0 0.0.0.255 any eq domain
+ permit udp 10.150.60.0 0.0.0.255 any eq domain
+ permit udp 10.150.96.0 0.0.0.255 any eq domain
+ permit ip any any
+
+interface GigabitEthernet0/3
+ip access-group ALLOW_VISITORS in
+
+-------------------------------------------------------------------------------------------------------
+remove*
 
 no ip access-list extended ALLOW_VISITOR1
 no ip access-list extended ALLOW_VISITOR2
@@ -219,6 +249,9 @@ interface Vlan325
 interface Vlan990
  no ip access-group DENY_VISITORS_TO_DC out
  no ip access-group ALLOW_DNS_HTTP_HTTPS out
+
+interface GigabitEthernet0/3
+no ip access-group ALLOW_VISITORS in
 
 
 
