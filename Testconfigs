@@ -86,3 +86,122 @@ interface Vlan220
 interface Vlan325
  ip access-group  ALLOW_VISITOR3 in
 
+
+----------------------------------------------------------------------------------------
+version 2
+ip access-list extended DENY_VISITORS_TO_DC
+ deny   tcp 10.150.28.0 0.0.0.255 any eq 80
+ deny   tcp 10.150.60.0 0.0.0.255 any eq 80
+ deny   tcp 10.150.96.0 0.0.0.255 any eq 80
+ deny   tcp 10.150.28.0 0.0.0.255 any eq 443
+ deny   tcp 10.150.60.0 0.0.0.255 any eq 443
+ deny   tcp 10.150.96.0 0.0.0.255 any eq 443
+ deny   icmp 10.150.28.0 0.0.0.255 any
+ deny   icmp 10.150.60.0 0.0.0.255 any
+ deny   icmp 10.150.96.0 0.0.0.255 any
+ permit ip any any
+
+
+ip access-list extended ALLOW_VISITOR1
+ permit icmp 10.150.28.0 0.0.0.255 10.150.0.0 0.0.255.255
+ permit udp 10.150.28.0 0.0.0.255 any eq 9999
+ permit udp 10.150.28.0 0.0.0.255 any eq 67
+ permit udp 10.150.28.0 0.0.0.255 any eq 68
+ permit tcp 10.150.28.0 0.0.0.255 any eq 80
+ permit tcp 10.150.28.0 0.0.0.255 any eq 443
+ permit udp 10.150.28.0 0.0.0.255 any eq domain
+ deny   ip any any
+
+
+ip access-list extended ALLOW_VISITOR2
+ permit icmp 10.150.60.0 0.0.0.255 10.150.0.0 0.0.255.255
+ permit udp 10.150.60.0 0.0.0.255 any eq 9999
+ permit udp 10.150.60.0 0.0.0.255 any eq 67
+ permit udp 10.150.60.0 0.0.0.255 any eq 68
+ permit tcp 10.150.60.0 0.0.0.255 any eq 80
+ permit tcp 10.150.60.0 0.0.0.255 any eq 443
+ permit udp 10.150.60.0 0.0.0.255 any eq domain
+ deny   ip any any
+
+
+ip access-list extended ALLOW_VISITOR3
+ permit icmp 10.150.96.0 0.0.0.255 10.150.0.0 0.0.255.255
+ permit udp 10.150.96.0 0.0.0.255 any eq 9999
+ permit udp 10.150.96.0 0.0.0.255 any eq 67
+ permit udp 10.150.96.0 0.0.0.255 any eq 68
+ permit tcp 10.150.96.0 0.0.0.255 any eq 80
+ permit tcp 10.150.96.0 0.0.0.255 any eq 443
+ permit udp 10.150.96.0 0.0.0.255 any eq domain
+ deny   ip any any
+
+
+interface Vlan990
+ ip access-group DENY_VISITORS_TO_DC out
+
+interface Vlan155
+ ip access-group  ALLOW_VISITOR1 in
+interface Vlan220
+ ip access-group  ALLOW_VISITOR2 in
+interface Vlan325
+ ip access-group  ALLOW_VISITOR3 in
+
+---------------------------------------------------------------------------
+version 3
+
+ip access-list extended DENY_VISITORS_TO_DC
+ deny   tcp 10.150.28.0 0.0.0.255 any eq www
+ deny   tcp 10.150.60.0 0.0.0.255 any eq www
+ deny   tcp 10.150.96.0 0.0.0.255 any eq www
+ deny   tcp 10.150.28.0 0.0.0.255 any eq 443
+ deny   tcp 10.150.60.0 0.0.0.255 any eq 443
+ deny   tcp 10.150.96.0 0.0.0.255 any eq 443
+ deny   icmp 10.150.28.0 0.0.0.255 any
+ deny   icmp 10.150.60.0 0.0.0.255 any
+ deny   icmp 10.150.96.0 0.0.0.255 any
+ permit ip any any
+
+
+ip access-list extended ALLOW_VISITOR1
+ permit icmp 10.150.28.0 0.0.0.255 10.150.0.0 0.0.255.255
+ permit udp 10.150.28.0 0.0.0.255 any eq 9999
+ permit udp 10.150.28.0 0.0.0.255 any eq bootps
+ permit udp 10.150.28.0 0.0.0.255 any eq bootpc
+ permit tcp 10.150.28.0 0.0.0.255 any eq www
+ permit tcp 10.150.28.0 0.0.0.255 any eq 443
+ permit udp 10.150.28.0 0.0.0.255 any eq domain
+ deny   ip any any
+
+
+ip access-list extended ALLOW_VISITOR2
+ permit icmp 10.150.60.0 0.0.0.255 10.150.0.0 0.0.255.255
+ permit udp 10.150.60.0 0.0.0.255 any eq 9999
+ permit udp 10.150.60.0 0.0.0.255 any eq bootps
+ permit udp 10.150.60.0 0.0.0.255 any eq bootpc
+ permit tcp 10.150.60.0 0.0.0.255 any eq www
+ permit tcp 10.150.60.0 0.0.0.255 any eq 443
+ permit udp 10.150.60.0 0.0.0.255 any eq domain
+ deny   ip any any
+
+
+ip access-list extended ALLOW_VISITOR3
+ permit icmp 10.150.96.0 0.0.0.255 10.150.0.0 0.0.255.255
+ permit udp 10.150.96.0 0.0.0.255 any eq 9999
+ permit udp any any eq bootps
+ permit udp any any eq bootpc
+ permit tcp 10.150.96.0 0.0.0.255 any eq www
+ permit tcp 10.150.96.0 0.0.0.255 any eq 443
+ permit udp 10.150.96.0 0.0.0.255 any eq domain
+ deny   ip any any
+
+
+interface Vlan990
+ ip access-group DENY_VISITORS_TO_DC out
+
+interface Vlan155
+ ip access-group  ALLOW_VISITOR1 in
+interface Vlan220
+ ip access-group  ALLOW_VISITOR2 in
+interface Vlan325
+ ip access-group  ALLOW_VISITOR3 in
+
+
