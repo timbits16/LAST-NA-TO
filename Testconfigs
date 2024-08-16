@@ -203,5 +203,22 @@ interface Vlan220
  ip access-group  ALLOW_VISITOR2 in
 interface Vlan325
  ip access-group  ALLOW_VISITOR3 in
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+
+no ip access-list extended ALLOW_VISITOR1
+no ip access-list extended ALLOW_VISITOR2
+no ip access-list extended ALLOW_VISITOR3
+no ip access-list extended DENY_VISITORS_TO_DC
+no ip access-list extended ALLOW_DNS_HTTP_HTTPS
+interface Vlan155
+ no ip access-group ALLOW_VISITOR1 in
+interface Vlan220
+ no ip access-group ALLOW_VISITOR2 in
+interface Vlan325
+ no ip access-group ALLOW_VISITOR3 in
+interface Vlan990
+ no ip access-group DENY_VISITORS_TO_DC out
+ no ip access-group ALLOW_DNS_HTTP_HTTPS out
+
 
 
