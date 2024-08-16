@@ -45,7 +45,7 @@ ip access-list extended DENY_VISITORS_TO_DC
 
 ip access-list extended ALLOW_VISITOR1
  permit icmp 10.150.28.0 0.0.0.255 10.150.0.0 0.0.255.255
- permit udp 10.150.28.0 0.0.0.255 any eq 1985
+ permit udp 10.150.28.0 0.0.0.255 any eq 9999
  permit udp any any eq bootps
  permit udp any any eq bootpc
  permit tcp 10.150.28.0 0.0.0.255 any eq www
@@ -56,7 +56,7 @@ ip access-list extended ALLOW_VISITOR1
 
 ip access-list extended ALLOW_VISITOR2
  permit icmp 10.150.60.0 0.0.0.255 10.150.0.0 0.0.255.255
- permit udp 10.150.60.0 0.0.0.255 any eq 1985
+ permit udp 10.150.60.0 0.0.0.255 any eq 9999
  permit udp 10.150.60.0 0.0.0.255 any eq bootps
  permit udp 10.150.60.0 0.0.0.255 any eq bootpc
  permit tcp 10.150.60.0 0.0.0.255 any eq www
@@ -67,7 +67,7 @@ ip access-list extended ALLOW_VISITOR2
 
 ip access-list extended ALLOW_VISITOR3
  permit icmp 10.150.96.0 0.0.0.255 10.150.0.0 0.0.255.255
- permit udp 10.150.96.0 0.0.0.255 any eq 1985
+ permit udp 10.150.96.0 0.0.0.255 any eq 9999
  permit udp 10.150.96.0 0.0.0.255 any eq bootps
  permit udp 10.150.96.0 0.0.0.255 any eq bootpc
  permit tcp 10.150.96.0 0.0.0.255 any eq www
