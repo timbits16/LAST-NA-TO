@@ -30,7 +30,7 @@ interface GigabitEthernet0/3
  ip access-group ALLOW_DNS_HTTP_HTTPS out
 
 -------------------------------------------------------------------------------
-ip access-list extended ALLOW_DNS_HTTP_HTTPS
+ip access-list extended DENY_VISITORS_TO_DC
  deny   tcp 10.150.28.0 0.0.0.255 any eq www
  deny   tcp 10.150.60.0 0.0.0.255 any eq www
  deny   tcp 10.150.96.0 0.0.0.255 any eq www
@@ -43,7 +43,7 @@ ip access-list extended ALLOW_DNS_HTTP_HTTPS
  permit ip any any
 
 
-ip access-list extended Visitor155
+ip access-list extended ALLOW_VISITOR1
  permit icmp 10.150.28.0 0.0.0.255 10.150.0.0 0.0.255.255
  permit udp 10.150.28.0 0.0.0.255 any eq 1985
  permit udp any any eq bootps
@@ -54,7 +54,7 @@ ip access-list extended Visitor155
  deny   ip any any
 
 
-ip access-list extended Visitor220
+ip access-list extended ALLOW_VISITOR2
  permit icmp 10.150.60.0 0.0.0.255 10.150.0.0 0.0.255.255
  permit udp 10.150.60.0 0.0.0.255 any eq 1985
  permit udp 10.150.60.0 0.0.0.255 any eq bootps
@@ -65,7 +65,7 @@ ip access-list extended Visitor220
  deny   ip any any
 
 
-ip access-list extended Visitor325
+ip access-list extended ALLOW_VISITOR3
  permit icmp 10.150.96.0 0.0.0.255 10.150.0.0 0.0.255.255
  permit udp 10.150.96.0 0.0.0.255 any eq 1985
  permit udp 10.150.96.0 0.0.0.255 any eq bootps
@@ -74,4 +74,15 @@ ip access-list extended Visitor325
  permit tcp 10.150.96.0 0.0.0.255 any eq 443
  permit udp 10.150.96.0 0.0.0.255 any eq domain
  deny   ip any any
+
+
+interface Vlan990
+ ip access-group DENY_VISITORS_TO_DC out
+
+interface Vlan155
+ ip access-group  ALLOW_VISITOR1 in
+interface Vlan220
+ ip access-group  ALLOW_VISITOR2 in
+interface Vlan325
+ ip access-group  ALLOW_VISITOR3 in
 
